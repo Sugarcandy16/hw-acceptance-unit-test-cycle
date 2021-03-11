@@ -9,6 +9,12 @@ class MoviesController < ApplicationController
   def index
     @movies = Movie.all
   end
+  
+  def same_director
+    dir = Movie.find(params[:id]).director
+    #dir = @movie1.director
+    @movies = Movie.where(director: dir)
+  end
 
   def new
     # default: render 'new' template
