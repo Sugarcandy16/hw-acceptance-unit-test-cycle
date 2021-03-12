@@ -14,7 +14,7 @@ class MoviesController < ApplicationController
     dir = Movie.find(params[:id]).director
     @movie1 = Movie.find(params[:id])
     if dir =~ /^[A-Z]/i
-      @movies = Movie.where(director: dir)
+      @movies = Movie.with_same_dir(dir)
     else
       flash[:notice] = "'#{@movie1.title}' has no director info"
       redirect_to movies_path

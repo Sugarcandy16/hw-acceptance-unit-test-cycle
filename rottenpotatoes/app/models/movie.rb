@@ -3,7 +3,7 @@ class Movie < ActiveRecord::Base
     #    return Movie.where(director: dir)
     #end
     
-    def with_dir(dir)
+    def self.with_same_dir(dir)
         Movie.where(director: dir)
     end
 end
