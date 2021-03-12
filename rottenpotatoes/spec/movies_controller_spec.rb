@@ -30,4 +30,5 @@ describe MoviesController do
            expect(dir !~ /[A-Z]/i).to eq true
        end
     end
+    
 end

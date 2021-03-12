@@ -7,7 +7,14 @@ class MoviesController < ApplicationController
   end
 
   def index
-    @movies = Movie.all
+    #@movies = Movie.all
+    @sort = params[:sort] || session[:sort]
+    session[:sort] = @sort
+    @all_ratings= Movie.all_ratings
+    @ratings_to_show = params[:ratings] || session[:ratings] || Hash.new
+    session[:ratings]= @ratings_to_show
+    
+    @movies = Movie.with_ratings(@ratings_to_show.keys).order(@sort)
   end
   
   def same_director
