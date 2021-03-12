@@ -12,8 +12,13 @@ class MoviesController < ApplicationController
   
   def same_director
     dir = Movie.find(params[:id]).director
-    #dir = @movie1.director
-    @movies = Movie.where(director: dir)
+    @movie1 = Movie.find(params[:id])
+    if dir =~ /^[A-Z]/i
+      @movies = Movie.where(director: dir)
+    else
+      flash[:notice] = "'#{@movie1.title}' has no director info"
+      redirect_to movies_path
+    end
   end
 
   def new
